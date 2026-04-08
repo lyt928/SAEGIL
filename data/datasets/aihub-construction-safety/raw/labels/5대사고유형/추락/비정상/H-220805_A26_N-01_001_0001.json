@@ -1,0 +1,126 @@
+{
+    "Raw_Data_Info.": {
+        "Raw_data_ID": "H-220805_A26_N-01_001",
+        "Location_ID": 26,
+        "type_ID": "A",
+        "Type_Description": "추락",
+        "process_ID": "a",
+        "Copyright": "Hulan Inc.",
+        "Resolution": "1920, 1080",
+        "Date": "2022-08-05",
+        "Main_class_ID": "SO-04",
+        "Main_item_ID": "AT",
+        "Situation_ID": "N-01",
+        "Start_Time": "22:12:09",
+        "End_Time": "22:12:27",
+        "Length": 18,
+        "GPS": "37.016927, 127.270752",
+        "Site_Condition": "2",
+        "Weather_Information": "1",
+        "Wind_Speed": "2",
+        "FPS": 30,
+        "device": 1,
+        "File_Extension": "mp4"
+    },
+    "Source_Data_Info.": {
+        "Source_Data": "H-220805_A26_N-01_001_0001",
+        "Extraction_Time": "00:00:03.60",
+        "File_extension": "jpg"
+    },
+    "Learning_Data_Info.": {
+        "Path": "./5대사고유형/추락/비정상/N-01/",
+        "Json_Data_ID": "H-220805_A26_N-01_001_0001",
+        "File_Extension": "JSON",
+        "Annotations": [
+            {
+                "class_ID": "SO-04",
+                "type": "polygon",
+                "item_ID": "ATO",
+                "value": [
+                    830.66,
+                    674.76,
+                    842.85,
+                    672.58,
+                    845.02,
+                    668.66,
+                    1119.23,
+                    662.57,
+                    1088.3,
+                    718.7,
+                    1068.31,
+                    731.77,
+                    886.8,
+                    742.1
+                ]
+            },
+            {
+                "class_ID": "SO-03",
+                "type": "polygon",
+                "item_ID": "ATO",
+                "value": [
+                    324.52,
+                    0.0,
+                    324.52,
+                    0.0,
+                    455.78,
+                    171.55,
+                    479.44,
+                    265.54,
+                    494.48,
+                    294.87,
+                    508.77,
+                    303.15,
+                    834.43,
+                    662.65,
+                    848.55,
+                    671.01,
+                    982.17,
+                    665.36,
+                    1117.6,
+                    664.0,
+                    1233.5,
+                    463.8,
+                    1359.1,
+                    256.22,
+                    1372.9,
+                    212.3,
+                    1410.4,
+                    163.0,
+                    1480.5,
+                    161.9,
+                    1587.2,
+                    0.0,
+                    327.51,
+                    0.0
+                ]
+            },
+            {
+                "class_ID": "SO-03",
+                "type": "polygon",
+                "item_ID": "ATO",
+                "value": [
+                    890.07,
+                    736.45,
+                    1071.42,
+                    730.91,
+                    1040.95,
+                    793.88,
+                    981.41,
+                    797.64,
+                    940.67,
+                    798.27
+                ]
+            },
+            {
+                "class_ID": "N-01",
+                "type": "bbox",
+                "value": [
+                    830.0,
+                    661.8,
+                    289.9,
+                    80.7
+                ]
+            }
+        ]
+    }
+}

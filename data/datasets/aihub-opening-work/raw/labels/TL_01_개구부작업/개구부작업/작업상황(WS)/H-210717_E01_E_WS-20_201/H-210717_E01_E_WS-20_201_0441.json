@@ -1,0 +1,59 @@
+{
+	"Raw Data Info.": {
+		"raw_data_ID": "H-210717_E01_E_WS-20_201",
+		"location_ID": "E01",
+		"process_ID": "E",
+		"situation_ID": "WS-20",
+		"situation_description": "개구부 덮개 작업",
+		"copyrighter": "㈜미디어그룹사람과숲",
+		"resolution": [
+			1920,
+			1080
+		],
+		"date": "2021-07-17",
+		"start_time": "11:46:00",
+		"end_time": "12:04:52",
+		"length": "1132",
+		"gps": [
+			36.479463,
+			127.287264
+		],
+		"worker_altitude": 0,
+		"horizontal": 1,
+		"fps": 30,
+		"f-stop": "F/2.8",
+		"exposure_time": null,
+		"device": 1,
+		"file_extension": "mp4"
+	},
+	"Source Data Info.": {
+		"source_data_ID": "H-210717_E01_E_WS-20_201_0441",
+		"frame": "00:12:44.10",
+		"file_extension": "jpg"
+	},
+	"Learning Data Info.": {
+		"path": "./작업환경/개구부작업/작업상황(WS)/H-210717_E01_E_WS-20_201",
+		"json_data_ID": "H-210717_E01_E_WS-20_201_0441",
+		"file_extension": "json",
+		"annotation": [
+			{
+				"class_id": "WO-01",
+				"box": [
+					757.2036796274896,
+					255.41279492484972,
+					184.13640978594617,
+					470.3034740205488
+				]
+			},
+			{
+				"class_id": "SO-08",
+				"box": [
+					547.1465645240349,
+					745.0464400585416,
+					362.48314826795934,
+					140.87056985720847
+				]
+			}
+		]
+	}
+}

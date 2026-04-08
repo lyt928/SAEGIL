@@ -1,0 +1,72 @@
+{
+    "Raw_Data_Info.": {
+        "Raw_data_ID": "H-220805_A26_Y-06_001",
+        "Location_ID": 26,
+        "type_ID": "A",
+        "Type_Description": "추락",
+        "process_ID": "e",
+        "Copyright": "Hulan Inc.",
+        "Resolution": "1920, 1080",
+        "Date": "2022-08-05",
+        "Main_class_ID": "SO-08",
+        "Main_item_ID": "AT",
+        "Situation_ID": "Y-06",
+        "Start_Time": "13:00:11",
+        "End_Time": "13:00:58",
+        "Length": 47,
+        "GPS": "37.016927, 127.270752",
+        "Site_Condition": "2",
+        "Weather_Information": "1",
+        "Wind_Speed": "2",
+        "FPS": 30,
+        "device": 2,
+        "File_Extension": "mp4"
+    },
+    "Source_Data_Info.": {
+        "Source_Data": "H-220805_A26_Y-06_001_0012",
+        "Extraction_Time": "00:00:43.38",
+        "File_extension": "jpg"
+    },
+    "Learning_Data_Info.": {
+        "Path": "./5대사고유형/추락/정상/Y-06/",
+        "Json_Data_ID": "H-220805_A26_Y-06_001_0012",
+        "File_Extension": "JSON",
+        "Annotations": [
+            {
+                "class_ID": "Y-06",
+                "type": "bbox",
+                "value": [
+                    0.0,
+                    0.0,
+                    1879.89,
+                    655.0
+                ]
+            },
+            {
+                "class_ID": "SO-08",
+                "type": "polygon",
+                "item_ID": "ATO",
+                "value": [
+                    1872.8,
+                    16.2,
+                    1693.8,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    652.63,
+                    883.75,
+                    642.67,
+                    886.35,
+                    635.52,
+                    929.76,
+                    633.7,
+                    950.95,
+                    639.42,
+                    1877.59,
+                    630.32
+                ]
+            }
+        ]
+    }
+}

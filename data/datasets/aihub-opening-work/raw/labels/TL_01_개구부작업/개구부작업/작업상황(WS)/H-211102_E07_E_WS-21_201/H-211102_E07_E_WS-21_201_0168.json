@@ -1,0 +1,68 @@
+{
+	"Raw Data Info.": {
+		"raw_data_ID": "H-211102_E07_E_WS-21_201",
+		"location_ID": "E07",
+		"process_ID": "E",
+		"situation_ID": "WS-21",
+		"situation_description": "설치 및 해체",
+		"copyrighter": "㈜미디어그룹사람과숲",
+		"resolution": [
+			1920,
+			1080
+		],
+		"date": "2021-11-02",
+		"start_time": "13:02:00",
+		"end_time": "13:11:56",
+		"length": "596",
+		"gps": [
+			37.468509,
+			126.467779
+		],
+		"worker_altitude": 0,
+		"horizontal": 1,
+		"fps": 30,
+		"f-stop": "F/2.8",
+		"exposure_time": null,
+		"device": 1,
+		"file_extension": "mp4"
+	},
+	"Source Data Info.": {
+		"source_data_ID": "H-211102_E07_E_WS-21_201_0168",
+		"frame": "00:02:44.50",
+		"file_extension": "jpg"
+	},
+	"Learning Data Info.": {
+		"path": "./작업환경/개구부작업/작업상황(WS)/H-211102_E07_E_WS-21_201",
+		"json_data_ID": "H-211102_E07_E_WS-21_201_0168",
+		"file_extension": "json",
+		"annotation": [
+			{
+				"class_id": "WO-01",
+				"box": [
+					623.6309875813129,
+					119.18391484328804,
+					451.33057362507384,
+					698.2850384387937
+				]
+			},
+			{
+				"class_id": "SO-08",
+				"box": [
+					857.8119455943229,
+					256.4938244672032,
+					1062.1880544056771,
+					633.3583340188998
+				]
+			},
+			{
+				"class_id": "SO-15",
+				"box": [
+					860.9588551154806,
+					376.2530461801338,
+					78.63824697586472,
+					132.60960851599958
+				]
+			}
+		]
+	}
+}

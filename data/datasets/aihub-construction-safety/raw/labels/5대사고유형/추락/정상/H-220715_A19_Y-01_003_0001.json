@@ -1,0 +1,68 @@
+{
+    "Raw_Data_Info.": {
+        "Raw_data_ID": "H-220715_A19_Y-01_003",
+        "Location_ID": 19,
+        "type_ID": "A",
+        "Type_Description": "추락",
+        "process_ID": "a",
+        "Copyright": "Hulan Inc.",
+        "Resolution": "1920, 1080",
+        "Date": "2022-07-15",
+        "Main_class_ID": "SO-03",
+        "Main_item_ID": "AT",
+        "Situation_ID": "Y-01",
+        "Start_Time": "13:47:00",
+        "End_Time": "13:48:15",
+        "Length": 75,
+        "GPS": "37.412068, 126.983331",
+        "Site_Condition": "1",
+        "Weather_Information": "1",
+        "Wind_Speed": "3",
+        "FPS": 30,
+        "device": 1,
+        "File_Extension": "mp4"
+    },
+    "Source_Data_Info.": {
+        "Source_Data": "H-220715_A19_Y-01_003_0001",
+        "Extraction_Time": "00:00:00.90",
+        "File_extension": "jpg"
+    },
+    "Learning_Data_Info.": {
+        "Path": "./5대사고유형/추락/정상/Y-01/",
+        "Json_Data_ID": "H-220715_A19_Y-01_003_0001",
+        "File_Extension": "JSON",
+        "Annotations": [
+            {
+                "class_ID": "SO-03",
+                "type": "polygon",
+                "item_ID": "ATO",
+                "value": [
+                    0.0,
+                    394.1,
+                    1918.83,
+                    1057.72,
+                    1917.52,
+                    1080.0,
+                    1917.52,
+                    1080.0,
+                    1917.52,
+                    1080.0,
+                    1296.42,
+                    1080.0,
+                    0.0,
+                    515.1
+                ]
+            },
+            {
+                "class_ID": "Y-01",
+                "type": "bbox",
+                "value": [
+                    0.0,
+                    389.6,
+                    1920.0,
+                    690.4
+                ]
+            }
+        ]
+    }
+}

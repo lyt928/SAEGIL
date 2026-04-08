@@ -1,0 +1,124 @@
+{
+    "Raw_Data_Info.": {
+        "Raw_data_ID": "H-220607_E16_Y-42_001",
+        "Location_ID": 16,
+        "type_ID": "E",
+        "Type_Description": "전도",
+        "process_ID": "q",
+        "Copyright": "Hulan Inc.",
+        "Resolution": "1920, 1080",
+        "Date": "2022-06-07",
+        "Main_class_ID": "SO-16",
+        "Main_item_ID": "AT",
+        "Situation_ID": "Y-42",
+        "Start_Time": "13:56:08",
+        "End_Time": "13:57:20",
+        "Length": 72,
+        "GPS": "37.288079, 126.940177",
+        "Site_Condition": "2",
+        "Weather_Information": "2",
+        "Wind_Speed": "1",
+        "FPS": 30,
+        "device": 1,
+        "File_Extension": "mp4"
+    },
+    "Source_Data_Info.": {
+        "Source_Data": "H-220607_E16_Y-42_001_0002",
+        "Extraction_Time": "00:00:01.47",
+        "File_extension": "jpg"
+    },
+    "Learning_Data_Info.": {
+        "Path": "./5대사고유형/전도/정상/Y-42/",
+        "Json_Data_ID": "H-220607_E16_Y-42_001_0002",
+        "File_Extension": "JSON",
+        "Annotations": [
+            {
+                "class_ID": "SO-12",
+                "type": "polygon",
+                "item_ID": "ATO",
+                "value": [
+                    1920.0,
+                    715.7,
+                    1916.71,
+                    0.87,
+                    1812.57,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    347.0
+                ]
+            },
+            {
+                "class_ID": "SO-16",
+                "type": "polygon",
+                "item_ID": "ATO",
+                "value": [
+                    172.15,
+                    657.99,
+                    176.27,
+                    669.17,
+                    196.86,
+                    675.05,
+                    326.84,
+                    609.76,
+                    348.0,
+                    595.6,
+                    514.5,
+                    61.6,
+                    500.95,
+                    42.16,
+                    466.83,
+                    40.99,
+                    293.3,
+                    586.2,
+                    297.43,
+                    592.12
+                ]
+            },
+            {
+                "class_ID": "SO-16",
+                "type": "polygon",
+                "item_ID": "ATO",
+                "value": [
+                    953.85,
+                    927.38,
+                    981.49,
+                    935.03,
+                    1072.66,
+                    785.63,
+                    1076.19,
+                    778.57,
+                    1088.54,
+                    781.51,
+                    1094.43,
+                    778.57,
+                    1152.66,
+                    562.12,
+                    1264.41,
+                    160.39,
+                    1270.29,
+                    106.86,
+                    1222.65,
+                    104.51,
+                    1130.89,
+                    431.54,
+                    1044.43,
+                    758.57,
+                    955.03,
+                    899.74
+                ]
+            },
+            {
+                "class_ID": "Y-42",
+                "type": "bbox",
+                "value": [
+                    0.0,
+                    0.0,
+                    1920.0,
+                    943.1
+                ]
+            }
+        ]
+    }
+}

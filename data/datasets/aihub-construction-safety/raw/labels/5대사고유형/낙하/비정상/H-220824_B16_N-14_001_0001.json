@@ -1,0 +1,86 @@
+{
+    "Raw_Data_Info.": {
+        "Raw_data_ID": "H-220824_B16_N-14_001",
+        "Location_ID": 16,
+        "type_ID": "B",
+        "Type_Description": "낙하",
+        "process_ID": "e",
+        "Copyright": "Hulan Inc.",
+        "Resolution": "1920, 1080",
+        "Date": "2022-08-24",
+        "Main_class_ID": "SO-18",
+        "Main_item_ID": "AT",
+        "Situation_ID": "N-14",
+        "Start_Time": "13:18:40",
+        "End_Time": "13:20:20",
+        "Length": 100,
+        "GPS": "37.288079, 126.940177",
+        "Site_Condition": "2",
+        "Weather_Information": "2",
+        "Wind_Speed": "2",
+        "FPS": 30,
+        "device": 1,
+        "File_Extension": "mp4"
+    },
+    "Source_Data_Info.": {
+        "Source_Data": "H-220824_B16_N-14_001_0001",
+        "Extraction_Time": "00:00:00.50",
+        "File_extension": "jpg"
+    },
+    "Learning_Data_Info.": {
+        "Path": "./5대사고유형/낙하/비정상/N-14/",
+        "Json_Data_ID": "H-220824_B16_N-14_001_0001",
+        "File_Extension": "JSON",
+        "Annotations": [
+            {
+                "class_ID": "SO-18",
+                "type": "polygon",
+                "item_ID": "ATO",
+                "value": [
+                    805.8,
+                    79.6,
+                    1387.8,
+                    86.9,
+                    1778.7,
+                    479.2,
+                    1683.12,
+                    693.45,
+                    1736.68,
+                    681.87,
+                    1589.01,
+                    972.86,
+                    1367.51,
+                    1017.74,
+                    1355.93,
+                    925.09,
+                    1347.24,
+                    927.98,
+                    1331.3,
+                    590.7,
+                    374.3,
+                    554.4,
+                    271.6,
+                    790.5,
+                    178.9,
+                    665.9,
+                    187.62,
+                    658.71,
+                    12.4,
+                    430.0,
+                    249.9,
+                    62.3
+                ]
+            },
+            {
+                "class_ID": "N-14",
+                "type": "bbox",
+                "value": [
+                    6.67,
+                    53.33,
+                    1778.23,
+                    968.34
+                ]
+            }
+        ]
+    }
+}
