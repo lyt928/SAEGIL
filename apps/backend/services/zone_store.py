@@ -18,7 +18,7 @@ class JsonZoneStore:
         target = self._target()
         if not target.exists():
             return []
-        return json.loads(target.read_text(encoding="utf-8"))
+        return json.loads(target.read_text(encoding="utf-8-sig"))
 
     def write_all(self, zones: list[dict]) -> list[dict]:
         target = self._target()
