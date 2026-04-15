@@ -53,10 +53,12 @@ def _decode_image_base64(image_base64: str) -> Image.Image:
 
 
 def _get_image_detections(request: ImageInferRequest) -> list[dict]:
-    detector_mode = request.detector_mode.strip().lower()
+    settings = get_settings()
+    detector_mode = (request.detector_mode or settings.detector_mode).strip().lower()
+    mock_scenario = request.mock_scenario or settings.mock_scenario
 
     if detector_mode == "mock":
-        return get_mock_detections(request.mock_scenario)
+        return get_mock_detections(mock_scenario)
 
     if detector_mode != "real":
         raise HTTPException(status_code=400, detail="detector_mode must be either 'real' or 'mock'")

@@ -17,4 +17,9 @@ app.mount("/dashboard", StaticFiles(directory=dashboard_dir, html=True), name="d
 
 @app.get("/")
 def root() -> dict[str, str]:
-    return {"message": f"{settings.app_name} backend is running"}
+    return {
+        "message": f"{settings.app_name} backend is running",
+        "run_mode": settings.run_mode,
+        "detector_mode": settings.detector_mode,
+        "mock_scenario": settings.mock_scenario,
+    }
