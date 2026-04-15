@@ -3,17 +3,22 @@ import numpy as np
 from ultralytics import YOLO
 import sys
 import os
+from pathlib import Path
 
 # 프로젝트 루트를 경로에 추가하여 core 폴더의 코드 읽음
-sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))
 
 # 동료의 파일 이름에 맞게 수정
 # 여기서는 core/zones/polygon_zone.py에 해당 함수들이 있다고 가정
+from core.detection.model_paths import get_default_model_path
 from core.zones.polygon_zone import detect_zone_intrusions, detection_foot_point
 
 def run_demo():
     # 1. 모델 설정 (무게중심 폴더 경로 활용)
-    model = YOLO("../../models/weights/yolov8n.pt")
+    model = YOLO(str(get_default_model_path(FILE)))
     cap = cv2.VideoCapture(0)
 
     # 2. 테스트용 구역 데이터 (동료의 코드 형식에 맞춤)

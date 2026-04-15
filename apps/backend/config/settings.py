@@ -1,6 +1,7 @@
 from functools import lru_cache
 
 from pydantic import BaseModel
+from core.detection.model_paths import DEFAULT_MODEL_RELATIVE_PATH
 
 
 class Settings(BaseModel):
@@ -9,7 +10,7 @@ class Settings(BaseModel):
     api_port: int = 8000
     log_path: str = "data/processed/events.jsonl"
     camera_source: str = "0"
-    model_path: str = "models/weights/yolo.pt"
+    model_path: str = DEFAULT_MODEL_RELATIVE_PATH
 
 
 @lru_cache

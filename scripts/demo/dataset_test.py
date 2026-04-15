@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 import sys
-import os
 from pathlib import Path
 
 # 1. 프로젝트 루트 경로 설정
@@ -12,6 +11,8 @@ if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
 # 동료 파일 이름에 맞춰 수입
+from core.detection.model_paths import get_default_model_path
+
 try:
     from core.zones.polygon_zone import detect_zone_intrusions, detection_foot_point
 except ImportError:
@@ -19,7 +20,7 @@ except ImportError:
 
 def run_full_dataset_red_test():
     # 모델 및 경로 설정
-    model_path = ROOT / "models" / "weights" / "yolov8n.pt"
+    model_path = get_default_model_path(FILE)
     model = YOLO(str(model_path))
 
     # 결과 저장 폴더 (data/samples 활용)

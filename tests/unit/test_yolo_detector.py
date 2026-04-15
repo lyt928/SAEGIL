@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from core.detection.model_paths import DEFAULT_MODEL_RELATIVE_PATH
 from core.detection.yolo_detector import YoloDetector
 
 
@@ -26,7 +27,7 @@ class FakeResult:
 
 
 def test_parse_result_normalizes_labels_and_tracks_ids() -> None:
-    detector = YoloDetector(model_path="models/weights/yolo.pt", allowed_labels={"person", "helmet", "vest"})
+    detector = YoloDetector(model_path=DEFAULT_MODEL_RELATIVE_PATH, allowed_labels={"person", "helmet", "vest"})
     result = FakeResult(
         names={0: "Person", 1: "Hardhat", 2: "safety vest"},
         boxes=FakeBoxes(
@@ -44,7 +45,7 @@ def test_parse_result_normalizes_labels_and_tracks_ids() -> None:
 
 
 def test_parse_result_filters_low_confidence_and_disallowed_labels() -> None:
-    detector = YoloDetector(model_path="models/weights/yolo.pt", confidence_threshold=0.5, allowed_labels={"person"})
+    detector = YoloDetector(model_path=DEFAULT_MODEL_RELATIVE_PATH, confidence_threshold=0.5, allowed_labels={"person"})
     result = FakeResult(
         names={0: "person", 1: "helmet"},
         boxes=FakeBoxes(
