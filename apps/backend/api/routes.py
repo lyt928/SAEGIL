@@ -16,6 +16,7 @@ from apps.backend.schemas.inference import (
     InferResponse,
 )
 from apps.backend.services.pipeline import process_frame
+from core.detection.mock_detector import get_mock_detections
 from core.detection.yolo_detector import YoloDetector
 from core.logging.event_logger import JsonlEventLogger
 
@@ -49,6 +50,23 @@ def _decode_image_base64(image_base64: str) -> Image.Image:
         raise HTTPException(status_code=400, detail="Decoded payload is not a valid image") from exc
 
 
+def _get_image_detections(request: ImageInferRequest) -> list[dict]:
+    detector_mode = request.detector_mode.strip().lower()
+
+    if detector_mode == "mock":
+        return get_mock_detections(request.mock_scenario)
+
+    if detector_mode != "real":
+        raise HTTPException(status_code=400, detail="detector_mode must be either 'real' or 'mock'")
+
+    if not request.image_base64:
+        raise HTTPException(status_code=400, detail="image_base64 is required when detector_mode is 'real'")
+
+    detector = get_detector()
+    image = _decode_image_base64(request.image_base64)
+    return detector.predict_as_dicts(image)
+
+
 @router.get("/health", response_model=HealthResponse)
 def health_check() -> HealthResponse:
     return HealthResponse(status="ok")
@@ -71,10 +89,7 @@ def run_inference(request: InferRequest) -> InferResponse:
 def run_image_inference(request: ImageInferRequest) -> ImageInferResponse:
     settings = get_settings()
     logger = JsonlEventLogger(path=settings.log_path)
-    detector = get_detector()
-    image = _decode_image_base64(request.image_base64)
-
-    detections = detector.predict_as_dicts(image)
+    detections = _get_image_detections(request)
     result = process_frame(
         detections=detections,
         zones=[item.model_dump(exclude_none=True) for item in request.zones],

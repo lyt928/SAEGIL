@@ -31,7 +31,9 @@ class InferResponse(BaseModel):
 
 
 class ImageInferRequest(BaseModel):
-    image_base64: str
+    image_base64: str | None = None
+    detector_mode: str = "real"
+    mock_scenario: str = "zone_intrusion_missing_ppe"
     zones: list[ZoneInput] = Field(default_factory=list)
 
 
