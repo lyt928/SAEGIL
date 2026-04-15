@@ -1,10 +1,12 @@
 from functools import lru_cache
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from core.detection.model_paths import DEFAULT_MODEL_RELATIVE_PATH
 
 
 class Settings(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
+
     app_name: str = "construction-safety-system"
     api_host: str = "0.0.0.0"
     api_port: int = 8000

@@ -40,7 +40,7 @@ def test_parse_result_normalizes_labels_and_tracks_ids() -> None:
 
     detections = detector._parse_result(result)
 
-    assert [item.label for item in detections] == ["person", "helmet", "safety_vest"]
+    assert [item.label for item in detections] == ["person", "helmet", "vest"]
     assert detections[0].track_id == 101
 
 
