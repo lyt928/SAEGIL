@@ -11,6 +11,7 @@ class Settings(BaseModel):
     api_host: str = "0.0.0.0"
     api_port: int = 8000
     log_path: str = "data/processed/events.jsonl"
+    zone_path: str = "data/samples/sample_zones.json"
     camera_source: str = "0"
     model_path: str = DEFAULT_MODEL_RELATIVE_PATH
 

@@ -15,7 +15,9 @@ from apps.backend.schemas.inference import (
     InferRequest,
     InferResponse,
 )
+from apps.backend.schemas.zones import ZoneDeleteResponse, ZoneListResponse, ZonePayload, ZoneResponse
 from apps.backend.services.pipeline import process_frame
+from apps.backend.services.zone_store import JsonZoneStore
 from core.detection.mock_detector import get_mock_detections
 from core.detection.yolo_detector import YoloDetector
 from core.logging.event_logger import JsonlEventLogger
@@ -65,6 +67,11 @@ def _get_image_detections(request: ImageInferRequest) -> list[dict]:
     detector = get_detector()
     image = _decode_image_base64(request.image_base64)
     return detector.predict_as_dicts(image)
+
+
+def get_zone_store() -> JsonZoneStore:
+    settings = get_settings()
+    return JsonZoneStore(path=settings.zone_path)
 
 
 @router.get("/health", response_model=HealthResponse)
@@ -135,3 +142,34 @@ def clear_events() -> EventClearResponse:
     logger = JsonlEventLogger(path=settings.log_path)
     logger.clear()
     return EventClearResponse(cleared=True)
+
+
+@router.get("/zones", response_model=ZoneListResponse)
+def list_zones() -> ZoneListResponse:
+    store = get_zone_store()
+    return ZoneListResponse(zones=[ZonePayload(**zone) for zone in store.read_all()])
+
+
+@router.get("/zones/{zone_id}", response_model=ZoneResponse)
+def get_zone(zone_id: str) -> ZoneResponse:
+    store = get_zone_store()
+    zone = store.read_one(zone_id)
+    if zone is None:
+        raise HTTPException(status_code=404, detail="Zone not found")
+    return ZoneResponse(zone=ZonePayload(**zone))
+
+
+@router.post("/zones", response_model=ZoneResponse)
+def create_or_update_zone(zone: ZonePayload) -> ZoneResponse:
+    store = get_zone_store()
+    saved = store.upsert(zone.model_dump(exclude_none=True))
+    return ZoneResponse(zone=ZonePayload(**saved))
+
+
+@router.delete("/zones/{zone_id}", response_model=ZoneDeleteResponse)
+def delete_zone(zone_id: str) -> ZoneDeleteResponse:
+    store = get_zone_store()
+    deleted = store.delete(zone_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Zone not found")
+    return ZoneDeleteResponse(deleted=True)
