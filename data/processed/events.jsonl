@@ -1,0 +1,4 @@
+{"type": "zone_intrusion", "severity": "high", "zone_id": "z1", "zone_name": "danger_area", "track_id": 1, "person_bbox": [100, 100, 200, 300], "trigger_point": [150.0, 300.0], "event_id": "021d7a50-1c2c-43f1-b726-cc7066962ccb", "timestamp": "2026-04-15T17:30:51.538427+00:00"}
+{"type": "zone_intrusion", "severity": "high", "zone_id": "zone-a", "zone_name": "test_zone", "track_id": 7, "person_bbox": [100, 100, 200, 300], "trigger_point": [150.0, 300.0], "event_id": "921e4e38-37ee-41ff-b7e2-b947cdde8219", "timestamp": "2026-04-15T17:32:16.227592+00:00"}
+{"type": "missing_helmet", "severity": "medium", "track_id": 7, "event_id": "8185a56b-2114-454d-b1b1-1cc99700f09b", "timestamp": "2026-04-15T17:32:16.228592+00:00"}
+{"type": "missing_vest", "severity": "low", "track_id": 7, "event_id": "7c982553-0842-4667-9651-f658f9c068dc", "timestamp": "2026-04-15T17:32:16.229591+00:00"}
