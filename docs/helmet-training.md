@@ -1,4 +1,4 @@
-# Helmet Detection Training
+# 안전모 탐지 학습
 
 ## 1. 1차 학습
 - 사용 모델: YOLO

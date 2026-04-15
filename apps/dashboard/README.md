@@ -1,4 +1,4 @@
-# Dashboard Placeholder
+# 대시보드 안내
 
 React 또는 PyQt 대시보드를 연결하기 위한 자리입니다.
 
