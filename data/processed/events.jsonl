@@ -5,3 +5,9 @@
 {"type": "zone_intrusion", "severity": "high", "zone_id": "zone-a", "zone_name": "test_zone", "track_id": 1, "person_bbox": [100, 100, 200, 300], "trigger_point": [150.0, 300.0], "event_id": "4d3e50d1-4341-4a1a-87bd-a94d8ba936f8", "timestamp": "2026-04-15T17:51:37.169647+00:00"}
 {"type": "missing_helmet", "severity": "medium", "track_id": 1, "event_id": "45083e5e-516a-44ae-b0ea-7886c1b2713d", "timestamp": "2026-04-15T17:51:37.170653+00:00"}
 {"type": "missing_vest", "severity": "low", "track_id": 1, "event_id": "99730476-cbb0-4898-a184-acaf79f5c230", "timestamp": "2026-04-15T17:51:37.171653+00:00"}
+{"type": "missing_helmet", "severity": "medium", "track_id": 1, "event_id": "c57506e3-0f24-4db0-ba17-c236e90464e1", "timestamp": "2026-04-15T17:54:51.751107+00:00"}
+{"type": "missing_vest", "severity": "low", "track_id": 1, "event_id": "60c43ca6-d9f6-4511-962d-d83002633e08", "timestamp": "2026-04-15T17:54:51.753062+00:00"}
+{"type": "missing_helmet", "severity": "medium", "track_id": 1, "event_id": "e6ca3c29-855b-4d51-bd07-5377f4362777", "timestamp": "2026-04-15T17:54:51.755074+00:00"}
+{"type": "missing_vest", "severity": "low", "track_id": 1, "event_id": "d756ac41-a4da-4b91-9902-ff689e2958b7", "timestamp": "2026-04-15T17:54:51.756068+00:00"}
+{"type": "missing_helmet", "severity": "medium", "track_id": 1, "event_id": "3cfa8922-e3cd-4997-b864-25f172adb53c", "timestamp": "2026-04-15T17:54:51.758075+00:00"}
+{"type": "missing_vest", "severity": "low", "track_id": 1, "event_id": "594f5f69-a66c-4cdc-bb80-d331762d69fb", "timestamp": "2026-04-15T17:54:51.759071+00:00"}
