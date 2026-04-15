@@ -11,3 +11,11 @@ class HealthResponse(BaseModel):
 
 class EventListResponse(BaseModel):
     events: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class EventResponse(BaseModel):
+    event: dict[str, Any]
+
+
+class EventClearResponse(BaseModel):
+    cleared: bool

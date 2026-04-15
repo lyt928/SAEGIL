@@ -8,7 +8,7 @@ from fastapi import APIRouter, HTTPException, Query
 from PIL import Image
 
 from apps.backend.config.settings import get_settings
-from apps.backend.schemas.events import EventListResponse, HealthResponse
+from apps.backend.schemas.events import EventClearResponse, EventListResponse, EventResponse, HealthResponse
 from apps.backend.schemas.inference import (
     ImageInferRequest,
     ImageInferResponse,
@@ -99,7 +99,39 @@ def run_image_inference(request: ImageInferRequest) -> ImageInferResponse:
 
 
 @router.get("/events", response_model=EventListResponse)
-def get_recent_events(limit: int = Query(default=20, ge=1, le=200)) -> EventListResponse:
+def get_recent_events(
+    limit: int = Query(default=20, ge=1, le=200),
+    event_type: str | None = Query(default=None),
+    severity: str | None = Query(default=None),
+) -> EventListResponse:
     settings = get_settings()
     logger = JsonlEventLogger(path=settings.log_path)
-    return EventListResponse(events=logger.read_recent_events(limit=limit))
+    events = logger.read_recent_events(limit=limit)
+
+    if event_type is not None:
+        normalized_type = event_type.strip().lower()
+        events = [event for event in events if str(event.get("type", "")).lower() == normalized_type]
+
+    if severity is not None:
+        normalized_severity = severity.strip().lower()
+        events = [event for event in events if str(event.get("severity", "")).lower() == normalized_severity]
+
+    return EventListResponse(events=events)
+
+
+@router.get("/events/{event_id}", response_model=EventResponse)
+def get_event(event_id: str) -> EventResponse:
+    settings = get_settings()
+    logger = JsonlEventLogger(path=settings.log_path)
+    event = logger.read_event(event_id)
+    if event is None:
+        raise HTTPException(status_code=404, detail="Event not found")
+    return EventResponse(event=event)
+
+
+@router.delete("/events", response_model=EventClearResponse)
+def clear_events() -> EventClearResponse:
+    settings = get_settings()
+    logger = JsonlEventLogger(path=settings.log_path)
+    logger.clear()
+    return EventClearResponse(cleared=True)
