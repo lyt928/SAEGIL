@@ -122,10 +122,17 @@ construction-safety-system/
 │  ├─ eval/
 │  └─ demo/
 ├─ docs/
-│  ├─ requirements.md
-│  ├─ architecture.md
-│  ├─ api-spec.md
-│  └─ demo-scenario.md
+│  ├─ overview/
+│  │  ├─ requirements.md
+│  │  ├─ architecture.md
+│  │  └─ implementation-checklist.md
+│  ├─ specs/
+│  │  ├─ api-spec.md
+│  │  ├─ cctv-기능-명세.md
+│  │  └─ 장비부착형-기능-명세.md
+│  └─ ops/
+│     ├─ demo-scenario.md
+│     └─ helmet-training.md
 ├─ tests/
 │  ├─ unit/
 │  └─ integration/
