@@ -28,6 +28,7 @@ router = APIRouter()
 
 @lru_cache
 def get_detector() -> YoloDetector:
+    # 실제 이미지 추론 시 재사용할 YOLO 모델을 한 번만 로드합니다.
     settings = get_settings()
     return YoloDetector(
         model_path=settings.model_path,
@@ -36,6 +37,7 @@ def get_detector() -> YoloDetector:
 
 
 def _decode_image_base64(image_base64: str) -> Image.Image:
+    # data URL 형식과 순수 base64 문자열을 모두 허용합니다.
     raw_value = image_base64.strip()
     if "," in raw_value and raw_value.lower().startswith("data:image"):
         raw_value = raw_value.split(",", 1)[1]
@@ -53,6 +55,7 @@ def _decode_image_base64(image_base64: str) -> Image.Image:
 
 
 def _get_image_detections(request: ImageInferRequest) -> list[dict]:
+    # 요청별 detector_mode에 따라 mock 또는 real 추론 경로를 선택합니다.
     settings = get_settings()
     detector_mode = (request.detector_mode or settings.detector_mode).strip().lower()
     mock_scenario = request.mock_scenario or settings.mock_scenario
@@ -83,6 +86,7 @@ def health_check() -> HealthResponse:
 
 @router.post("/infer", response_model=InferResponse)
 def run_inference(request: InferRequest) -> InferResponse:
+    # 이미 계산된 detection 입력을 받아 규칙 기반 파이프라인만 수행합니다.
     settings = get_settings()
     logger = JsonlEventLogger(path=settings.log_path)
 
@@ -96,6 +100,7 @@ def run_inference(request: InferRequest) -> InferResponse:
 
 @router.post("/infer/image", response_model=ImageInferResponse)
 def run_image_inference(request: ImageInferRequest) -> ImageInferResponse:
+    # 이미지 입력은 내부에서 detector를 거쳐 detections를 만든 뒤 같은 파이프라인으로 보냅니다.
     settings = get_settings()
     logger = JsonlEventLogger(path=settings.log_path)
     detections = _get_image_detections(request)
@@ -113,6 +118,7 @@ def get_recent_events(
     event_type: str | None = Query(default=None),
     severity: str | None = Query(default=None),
 ) -> EventListResponse:
+    # 최신 이벤트를 읽고, 필요하면 타입과 심각도로 한 번 더 필터링합니다.
     settings = get_settings()
     logger = JsonlEventLogger(path=settings.log_path)
     events = logger.read_recent_events(limit=limit)
@@ -163,6 +169,7 @@ def get_zone(zone_id: str) -> ZoneResponse:
 
 @router.post("/zones", response_model=ZoneResponse)
 def create_or_update_zone(zone: ZonePayload) -> ZoneResponse:
+    # 같은 id가 있으면 갱신하고, 없으면 새 구역으로 추가합니다.
     store = get_zone_store()
     saved = store.upsert(zone.model_dump(exclude_none=True))
     return ZoneResponse(zone=ZonePayload(**saved))

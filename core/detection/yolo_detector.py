@@ -13,12 +13,14 @@ class YoloDetector:
         confidence_threshold: float = 0.25,
         allowed_labels: set[str] | None = None,
     ) -> None:
+        # 실제 모델 로드는 지연시키고, 설정만 먼저 저장합니다.
         self.model_path = Path(model_path)
         self.confidence_threshold = confidence_threshold
         self.allowed_labels = allowed_labels
         self._model: Any | None = None
 
     def load(self) -> None:
+        # 첫 추론 시점에만 ultralytics YOLO 모델을 메모리에 올립니다.
         if self._model is not None:
             return
         if not self.model_path.exists():
@@ -32,6 +34,7 @@ class YoloDetector:
         self._model = YOLO(str(self.model_path))
 
     def predict(self, frame: object) -> list[Detection]:
+        # 모델 추론 결과를 프로젝트 공통 Detection 형식으로 변환합니다.
         self.load()
         results = self._model.predict(frame, conf=self.confidence_threshold, verbose=False)
         detections: list[Detection] = []
@@ -43,6 +46,7 @@ class YoloDetector:
         return [detection.__dict__ for detection in self.predict(frame)]
 
     def _parse_result(self, result: Any) -> list[Detection]:
+        # YOLO 결과 객체에서 bbox, score, class, track 정보를 꺼내 정규화합니다.
         names = getattr(result, "names", {})
         boxes = getattr(result, "boxes", None)
         if boxes is None:
@@ -81,6 +85,7 @@ class YoloDetector:
 
     @staticmethod
     def _normalize_label(label: str) -> str:
+        # 데이터셋마다 다른 클래스 이름을 내부 공통 라벨로 맞춥니다.
         normalized = label.strip().lower().replace("-", "_").replace(" ", "_")
         aliases = {
             "hardhat": "helmet",

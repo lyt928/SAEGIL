@@ -10,17 +10,20 @@ class JsonlEventLogger:
     path: str
 
     def _target(self) -> Path:
+        # 로그 파일 상위 디렉터리를 미리 생성합니다.
         target = Path(self.path)
         target.parent.mkdir(parents=True, exist_ok=True)
         return target
 
     def prepare_event(self, event: dict) -> dict:
+        # 이벤트 ID와 timestamp가 없으면 저장 직전에 자동 보강합니다.
         prepared = dict(event)
         prepared.setdefault("event_id", str(uuid4()))
         prepared.setdefault("timestamp", datetime.now(timezone.utc).isoformat())
         return prepared
 
     def write_event(self, event: dict) -> dict:
+        # 이벤트 한 건을 JSONL 한 줄로 저장합니다.
         prepared = self.prepare_event(event)
         target = self._target()
         with target.open("a", encoding="utf-8") as file:
@@ -44,6 +47,7 @@ class JsonlEventLogger:
         return [json.loads(line) for line in lines if line.strip()]
 
     def read_recent_events(self, limit: int = 50) -> list[dict]:
+        # 최근 이벤트부터 보이도록 역순으로 반환합니다.
         events = self.read_all_events()
         return list(reversed(events[-limit:]))
 

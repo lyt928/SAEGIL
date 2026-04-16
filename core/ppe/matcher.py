@@ -13,6 +13,7 @@ def _point_in_box(point: tuple[float, float], bbox: tuple[int, int, int, int]) -
 
 
 def _relative_position(point: tuple[float, float], bbox: tuple[int, int, int, int]) -> tuple[float, float]:
+    # 사람 bbox 안에서의 상대 좌표를 구해 헬멧/조끼 위치 판정에 사용합니다.
     x, y = point
     x1, y1, x2, y2 = bbox
     width = max(x2 - x1, 1)
@@ -24,6 +25,7 @@ def _is_helmet_for_person(
     helmet_bbox: tuple[int, int, int, int],
     person_bbox: tuple[int, int, int, int],
 ) -> bool:
+    # 헬멧 중심점이 사람 상단 영역에 있을 때만 착용으로 간주합니다.
     center = _bbox_center(helmet_bbox)
     if not _point_in_box(center, person_bbox):
         return False
@@ -36,6 +38,7 @@ def _is_vest_for_person(
     vest_bbox: tuple[int, int, int, int],
     person_bbox: tuple[int, int, int, int],
 ) -> bool:
+    # 조끼 중심점이 사람 몸통 영역에 있을 때만 착용으로 간주합니다.
     center = _bbox_center(vest_bbox)
     if not _point_in_box(center, person_bbox):
         return False
@@ -45,6 +48,7 @@ def _is_vest_for_person(
 
 
 def evaluate_ppe(detections: list[dict]) -> list[dict]:
+    # 사람마다 연결된 헬멧/조끼가 있는지 계산해 PPE 결과를 만듭니다.
     people = [det for det in detections if det.get("label") == "person" and det.get("bbox")]
     helmets = [det for det in detections if det.get("label") == "helmet" and det.get("bbox")]
     vests = [det for det in detections if det.get("label") == "vest" and det.get("bbox")]

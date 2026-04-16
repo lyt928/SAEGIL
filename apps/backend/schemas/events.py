@@ -10,6 +10,7 @@ class HealthResponse(BaseModel):
 
 
 class EventListResponse(BaseModel):
+    # 최근 이벤트 목록 응답 형식입니다.
     events: list[dict[str, Any]] = Field(default_factory=list)
 
 
