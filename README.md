@@ -4,6 +4,8 @@
 
 이 프로젝트의 핵심 목표는 사고 발생 후 대응이 아니라, 사고 전 위험 징후를 조기에 탐지하여 안전사고를 예방하는 것입니다.
 
+현재 구현 및 1차 개발 범위는 CCTV형 감시 시나리오를 기준으로 하며, 장비부착형 시나리오는 향후 확장안으로 다룹니다.
+
 ---
 
 ## 1. 프로젝트 개요
@@ -122,10 +124,17 @@ construction-safety-system/
 │  ├─ eval/
 │  └─ demo/
 ├─ docs/
-│  ├─ requirements.md
-│  ├─ architecture.md
-│  ├─ api-spec.md
-│  └─ demo-scenario.md
+│  ├─ overview/
+│  │  ├─ requirements.md
+│  │  ├─ architecture.md
+│  │  └─ implementation-checklist.md
+│  ├─ specs/
+│  │  ├─ api-spec.md
+│  │  ├─ cctv-기능-명세.md
+│  │  └─ 장비부착형-기능-명세.md
+│  └─ ops/
+│     ├─ demo-scenario.md
+│     └─ helmet-training.md
 ├─ tests/
 │  ├─ unit/
 │  └─ integration/
@@ -239,7 +248,105 @@ construction-safety-system/
 
 ---
 
-## 9. IDE용 작업 프롬프트
+## 9. 현재 구현 상태 요약
+
+현재 로컬에서 확인된 동작 범위는 아래와 같습니다.
+
+- FastAPI 백엔드 기동
+- `GET /`, `GET /health` 응답
+- `POST /infer` 수동 탐지 결과 입력
+- `POST /infer/image` 이미지/base64 입력
+- `POST /infer/image`의 `mock` / `real` 탐지 모드
+- `GET /events`, `GET /events/{event_id}`, `DELETE /events`
+- `GET /zones`, `GET /zones/{zone_id}`, `POST /zones`, `DELETE /zones/{zone_id}`
+- `/dashboard/` 정적 최소 대시보드
+- mock 추론부터 이벤트 조회까지 통합 테스트
+
+아직 남아 있는 큰 작업은 실제 카메라 연동 고도화, 실제 모델 품질 검증, 실시간 스트림 UI 고도화입니다.
+
+---
+
+## 10. 실행 방법
+
+### 1. 백엔드 실행
+
+가상환경 활성화 후:
+
+```powershell
+. .\.venv\Scripts\Activate.ps1
+python -m uvicorn apps.backend.main:app --reload
+```
+
+또는 데모 스크립트 사용:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\demo\run_backend.ps1
+```
+
+### 2. 실행 모드
+
+- `dev`: 기본 개발 모드
+- `demo`: mock 탐지를 기본으로 쓰는 시연 모드
+- `real`: 실제 모델 추론 모드
+
+예시:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\demo\run_backend.ps1 -Mode demo
+```
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\demo\run_backend.ps1 -Mode real -DetectorMode real
+```
+
+빠른 실행용 스크립트:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\demo\run_backend_mock.ps1
+powershell -ExecutionPolicy Bypass -File .\scripts\demo\run_backend_real.ps1
+```
+
+### 3. 영상 입력 파이프라인 실행
+
+mock 모드:
+
+```powershell
+python .\scripts\demo\run_video_pipeline.py --source 0 --mode mock --max-frames 30
+```
+
+영상 파일 입력:
+
+```powershell
+python .\scripts\demo\run_video_pipeline.py --source path\to\video.mp4 --mode mock --max-frames 30
+```
+
+### 4. 대시보드
+
+백엔드 실행 후 브라우저에서 아래 경로로 접속:
+
+```text
+http://127.0.0.1:8000/dashboard/
+```
+
+---
+
+## 11. 현재 API
+
+- `GET /`
+- `GET /health`
+- `POST /infer`
+- `POST /infer/image`
+- `GET /events`
+- `GET /events/{event_id}`
+- `DELETE /events`
+- `GET /zones`
+- `GET /zones/{zone_id}`
+- `POST /zones`
+- `DELETE /zones/{zone_id}`
+
+---
+
+## 12. IDE용 작업 프롬프트
 
 다음 요구사항으로 프로젝트를 구현합니다.
 
@@ -287,7 +394,7 @@ AI 기반 공사현장 사고 예방 및 실시간 경보 시스템
 
 ---
 
-## 10. 향후 확장 방향
+## 13. 향후 확장 방향
 
 - 안전조끼·안전화 인식 확대
 - 자세 추정 기반 위험행동 분석
@@ -297,6 +404,6 @@ AI 기반 공사현장 사고 예방 및 실시간 경보 시스템
 
 ---
 
-## 11. 한 줄 요약
+## 14. 한 줄 요약
 
 이 프로젝트는 공사현장 카메라 영상을 기반으로 작업자와 보호장비를 인식하고, 위험구역 침입 및 주요 위험상황을 실시간 감지하여 경고와 로그를 제공하는 AI 기반 안전관리 프로토타입입니다.

@@ -33,7 +33,7 @@ class JsonlEventLogger:
             stored_events.append(self.write_event(event))
         return stored_events
 
-    def read_recent_events(self, limit: int = 50) -> list[dict]:
+    def read_all_events(self) -> list[dict]:
         target = self._target()
         if not target.exists():
             return []
@@ -41,5 +41,19 @@ class JsonlEventLogger:
         with target.open("r", encoding="utf-8") as file:
             lines = file.readlines()
 
-        events = [json.loads(line) for line in lines if line.strip()]
+        return [json.loads(line) for line in lines if line.strip()]
+
+    def read_recent_events(self, limit: int = 50) -> list[dict]:
+        events = self.read_all_events()
         return list(reversed(events[-limit:]))
+
+    def read_event(self, event_id: str) -> dict | None:
+        for event in reversed(self.read_all_events()):
+            if event.get("event_id") == event_id:
+                return event
+        return None
+
+    def clear(self) -> None:
+        target = self._target()
+        if target.exists():
+            target.unlink()
