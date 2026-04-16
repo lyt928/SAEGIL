@@ -332,17 +332,17 @@ http://127.0.0.1:8000/dashboard/
 
 ## 11. 현재 API
 
-- `GET /`
-- `GET /health`
-- `POST /infer`
-- `POST /infer/image`
-- `GET /events`
-- `GET /events/{event_id}`
-- `DELETE /events`
-- `GET /zones`
-- `GET /zones/{zone_id}`
-- `POST /zones`
-- `DELETE /zones/{zone_id}`
+- `GET /` : 기본 안내 또는 서버 진입점 응답을 반환합니다.
+- `GET /health` : 서버 상태를 확인합니다.
+- `POST /infer` : 추론 요청 데이터를 받아 분석 결과를 반환합니다.
+- `POST /infer/image` : 이미지 또는 base64 입력을 받아 추론 결과를 반환합니다.
+- `GET /events` : 저장된 이벤트 목록을 조회합니다.
+- `GET /events/{event_id}` : 특정 이벤트 상세 정보를 조회합니다.
+- `DELETE /events` : 저장된 이벤트 로그를 초기화합니다.
+- `GET /zones` : 등록된 위험구역 목록을 조회합니다.
+- `GET /zones/{zone_id}` : 특정 위험구역 정보를 조회합니다.
+- `POST /zones` : 새 위험구역을 등록하거나 기존 구역 정보를 갱신합니다.
+- `DELETE /zones/{zone_id}` : 특정 위험구역을 삭제합니다.
 
 ---
 
