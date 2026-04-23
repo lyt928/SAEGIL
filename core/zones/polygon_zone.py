@@ -7,11 +7,13 @@ def detection_center(bbox: tuple[int, int, int, int]) -> tuple[float, float]:
 
 
 def detection_foot_point(bbox: tuple[int, int, int, int]) -> tuple[float, float]:
+    # 사람의 하단 중앙점을 발 위치로 간주해 구역 침입을 판정합니다.
     x1, _, x2, y2 = bbox
     return ((x1 + x2) / 2, float(y2))
 
 
 def point_in_polygon(point: tuple[float, float], polygon: list[tuple[float, float]]) -> bool:
+    # Ray casting 방식으로 점이 다각형 안에 있는지 계산합니다.
     if len(polygon) < 3:
         return False
 
@@ -38,6 +40,7 @@ def normalize_zone_points(zone: dict) -> list[tuple[float, float]]:
 
 
 def detect_zone_intrusions(detections: list[dict], zones: list[dict]) -> list[dict]:
+    # 사람 detection의 발 위치가 zone 내부에 있으면 침입 이벤트를 생성합니다.
     events = []
     for det in detections:
         if det.get("label") != "person" or not det.get("bbox"):

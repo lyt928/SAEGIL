@@ -6,6 +6,7 @@ from pathlib import Path
 
 # 1. 프로젝트 루트 경로 설정
 FILE = Path(__file__).resolve()
+# 프로젝트 루트를 기준으로 모델과 core 모듈 경로를 맞춥니다.
 ROOT = FILE.parents[2] 
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
@@ -19,6 +20,7 @@ except ImportError:
     from core.zones.polygon import detect_zone_intrusions, detection_foot_point
 
 def run_full_dataset_red_test():
+    # 데이터셋 전체 이미지를 돌면서 구역 침입 결과를 시각화합니다.
     # 모델 및 경로 설정
     model_path = get_default_model_path(FILE)
     model = YOLO(str(model_path))
@@ -55,6 +57,7 @@ def run_full_dataset_red_test():
         # YOLO 추론
         results = model(frame, verbose=False)
         
+        # 사람 detection만 남겨서 구역 판정에 사용합니다.
         detections = []
         for box in results[0].boxes:
             if int(box.cls[0]) == 0: # 사람
@@ -68,6 +71,7 @@ def run_full_dataset_red_test():
         intrusions = detect_zone_intrusions(detections, zones)
 
         # 결과 시각화
+        # 결과 이미지는 발표용으로 바로 볼 수 있게 저장합니다.
         overlay = frame.copy()
         for zone in zones:
             pts = np.array(zone["points"], np.int32)

@@ -7,6 +7,7 @@ from pathlib import Path
 
 # 프로젝트 루트를 경로에 추가하여 core 폴더의 코드 읽음
 FILE = Path(__file__).resolve()
+# 프로젝트 루트를 기준으로 core 모듈을 import할 수 있게 합니다.
 ROOT = FILE.parents[2]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
@@ -17,6 +18,7 @@ from core.detection.model_paths import get_default_model_path
 from core.zones.polygon_zone import detect_zone_intrusions, detection_foot_point
 
 def run_demo():
+    # 웹캠 입력과 기본 YOLO 모델을 사용한 실시간 시연 함수입니다.
     # 1. 모델 설정 (무게중심 폴더 경로 활용)
     model = YOLO(str(get_default_model_path(FILE)))
     cap = cv2.VideoCapture(0)
@@ -42,6 +44,7 @@ def run_demo():
         results = model(frame, verbose=False)
         
         # 동료의 함수가 기대하는 detections 형식으로 변환
+        # 사람만 골라서 구역 침입 판정 형식으로 변환합니다.
         current_detections = []
         for box in results[0].boxes:
             cls = int(box.cls[0])
@@ -58,6 +61,7 @@ def run_demo():
 
         # 4. 시각화 (화면에 결과를 그리기)
         # 구역 그리기
+        # 위험 상태면 빨간색, 아니면 초록색으로 화면에 표시합니다.
         for zone in zones:
             pts = np.array(zone["points"], np.int32)
             color = (0, 0, 255) if any(i["zone_id"] == zone["id"] for i in intrusions) else (0, 255, 0)

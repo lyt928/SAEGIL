@@ -5,6 +5,7 @@ DEFAULT_MOCK_SCENARIO = "zone_intrusion_missing_ppe"
 
 
 def get_mock_detections(scenario: str = DEFAULT_MOCK_SCENARIO) -> list[dict]:
+    # 시연용 고정 detection 세트를 반환해 모델 없이 파이프라인을 검증합니다.
     normalized = scenario.strip().lower()
 
     scenarios: dict[str, list[dict]] = {

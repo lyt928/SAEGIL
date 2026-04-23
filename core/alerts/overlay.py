@@ -1,4 +1,5 @@
 def build_alert_messages(events: list[dict]) -> list[str]:
+    # 내부 이벤트 타입을 사용자에게 보여줄 경고 문구로 바꿉니다.
     messages = []
     for event in events:
         if event["type"] == "zone_intrusion":
